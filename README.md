@@ -31,7 +31,7 @@ const ResolveEntryModulesPlugin = require( 'resolve-entry-modules-webpack-plugin
 module.exports = {
 	entry: {
 		one: './entry-one/index.js',
-		two: './entry-one/index.js'
+		two: './entry-two/index.js'
 	},
 	plugins: [
 		new ResolveEntryModulesPlugin()
