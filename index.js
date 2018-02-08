@@ -48,7 +48,7 @@ module.exports = class ResolveEntryModulesPlugin {
 	 * containing path directories.
 	 *
 	 * @param  {*}        entry   Compiler options entry
-	 * @param  {string}  context Compiler options context
+	 * @param  {string}   context Compiler options context
 	 * @return {string[]}         Entry absolute containing path directories
 	 */
 	static getEntryRoots( entry, context ) {
