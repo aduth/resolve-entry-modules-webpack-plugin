@@ -55,7 +55,12 @@ module.exports = class ResolveEntryModulesPlugin {
 	static getEntryRoots( entry, context ) {
 		entry = ResolveEntryModulesPlugin.getNormalizedEntry( entry );
 
-		return uniq( map( entry, ( path ) => dirname( resolveFrom( context, path ) ) ) );
+		return uniq( map( entry, ( path ) => {
+			// Cannot resolve paths with query parameters, so remove
+			path = path.replace( /\?.*/, '' );
+
+			return dirname( resolveFrom( context, path ) );
+		} ) );
 	}
 
 	apply( compiler ) {
