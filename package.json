@@ -27,10 +27,10 @@
     "resolve-from": "^4.0.0"
   },
   "devDependencies": {
+    "@aduth/eslint-config": "^2.0.0",
     "chai": "^3.5.0",
-    "eslint": "^3.19.0",
-    "eslint-config-wpcalypso": "^0.7.1",
-    "eslint-plugin-wpcalypso": "^3.1.1",
+    "eslint": "^4.18.0",
+    "eslint-plugin-jsdoc": "^3.4.1",
     "mocha": "^3.2.0",
     "mockery": "^2.1.0",
     "webpack": "^2.3.3"

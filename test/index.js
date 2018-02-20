@@ -46,14 +46,14 @@ describe( 'ResolveEntryModulesPlugin', () => {
 		it( 'should return object with arrays flattened', () => {
 			const entry = {
 				main: './index.js',
-				multi: [ './one.js', './two.js' ]
+				multi: [ './one.js', './two.js' ],
 			};
 			const normalized = ResolveEntryModulesPlugin.getNormalizedEntry( entry );
 
 			expect( normalized ).to.eql( {
 				main: './index.js',
 				'./one.js': './one.js',
-				'./two.js': './two.js'
+				'./two.js': './two.js',
 			} );
 		} );
 
@@ -62,7 +62,7 @@ describe( 'ResolveEntryModulesPlugin', () => {
 			const normalized = ResolveEntryModulesPlugin.getNormalizedEntry( entry );
 
 			expect( normalized ).to.eql( {
-				'./index.js': './index.js'
+				'./index.js': './index.js',
 			} );
 		} );
 
@@ -71,7 +71,7 @@ describe( 'ResolveEntryModulesPlugin', () => {
 			const normalized = ResolveEntryModulesPlugin.getNormalizedEntry( entry );
 
 			expect( normalized ).to.eql( {
-				'./index.js': './index.js'
+				'./index.js': './index.js',
 			} );
 		} );
 
@@ -87,7 +87,7 @@ describe( 'ResolveEntryModulesPlugin', () => {
 
 			expect( normalized ).to.eql( {
 				'./one.js': './one.js',
-				'./two.js': './two.js'
+				'./two.js': './two.js',
 			} );
 		} );
 	} );

@@ -1,8 +1,13 @@
 {
 	"root": true,
-	"extends": "wpcalypso",
+	"extends": "@aduth/eslint-config",
 	"env": {
 		"node": true,
-		"mocha": true
+		"mocha": true,
+		"es6": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "script"
 	}
 }

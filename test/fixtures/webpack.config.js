@@ -11,6 +11,6 @@ module.exports = {
 	entry: [ '_example-one', '_example-two?query', './src/index.js' ],
 	plugins: [
 		new EntryResolvePlugin(),
-		new SilentOutputPlugin()
-	]
+		new SilentOutputPlugin(),
+	],
 };

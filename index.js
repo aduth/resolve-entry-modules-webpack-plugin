@@ -84,12 +84,12 @@ module.exports = class ResolveEntryModulesPlugin {
 						// Add entry root as resolve base path
 						const obj = assign( {}, request, {
 							path: resolvePath,
-							request: './' + request.request
+							request: './' + request.request,
 						} );
 
 						resolver.doResolve( 'resolve', obj, '', callback );
 					} );
-				}
+				},
 			} );
 		} );
 	}
