@@ -2,8 +2,9 @@
  * External dependencies
  */
 
-const { dirname, resolve } = require( 'path' );
+const { dirname } = require( 'path' );
 const containsPath = require( 'contains-path' );
+const resolveFrom = require( 'resolve-from' );
 const { reduce, zipObject, uniq, map, isPlainObject, find, assign } = require( 'lodash' );
 
 module.exports = class ResolveEntryModulesPlugin {
@@ -54,7 +55,12 @@ module.exports = class ResolveEntryModulesPlugin {
 	static getEntryRoots( entry, context ) {
 		entry = ResolveEntryModulesPlugin.getNormalizedEntry( entry );
 
-		return uniq( map( entry, ( path ) => dirname( resolve( context, path ) ) ) );
+		return uniq( map( entry, ( path ) => {
+			// Cannot resolve paths with query parameters, so remove
+			path = path.replace( /\?.*/, '' );
+
+			return dirname( resolveFrom( context, path ) );
+		} ) );
 	}
 
 	apply( compiler ) {

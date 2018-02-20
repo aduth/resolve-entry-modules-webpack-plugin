@@ -8,7 +8,7 @@ class SilentOutputPlugin {
 
 module.exports = {
 	context: __dirname,
-	entry: './src/index.js',
+	entry: [ '_example-one', '_example-two?query', './src/index.js' ],
 	plugins: [
 		new EntryResolvePlugin(),
 		new SilentOutputPlugin()

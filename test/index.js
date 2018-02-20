@@ -2,18 +2,39 @@
  * External dependencies
  */
 
-const path = require( 'path' );
+const { resolve } = require( 'path' );
 const { expect } = require( 'chai' );
 const webpack = require( 'webpack' );
+const mockery = require( 'mockery' );
 
 /**
  * Internal dependencies
  */
 
-const ResolveEntryModulesPlugin = require( '../' );
 const config = require( './fixtures/webpack.config.js' );
 
 describe( 'ResolveEntryModulesPlugin', () => {
+	let ResolveEntryModulesPlugin;
+
+	before( () => {
+		mockery.registerMock( 'resolve-from', ( source, path ) => {
+			return resolve( source, path );
+		} );
+
+		mockery.enable( {
+			useCleanCache: true,
+			warnOnReplace: false,
+			warnOnUnregistered: false,
+		} );
+
+		ResolveEntryModulesPlugin = require( '../' );
+	} );
+
+	after( () => {
+		mockery.deregisterAll();
+		mockery.disable();
+	} );
+
 	describe( '.getNormalizedEntry()', () => {
 		it( 'should return object with simple values verbatim', () => {
 			const entry = { main: './index.js' };
@@ -76,7 +97,7 @@ describe( 'ResolveEntryModulesPlugin', () => {
 			const entry = [ './one.js', './two.js' ];
 			const entryRoots = ResolveEntryModulesPlugin.getEntryRoots( entry, 'src' );
 
-			expect( entryRoots ).to.eql( [ path.resolve( process.cwd(), 'src' ) ] );
+			expect( entryRoots ).to.eql( [ resolve( process.cwd(), 'src' ) ] );
 		} );
 	} );
 
