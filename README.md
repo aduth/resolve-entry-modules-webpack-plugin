@@ -41,4 +41,6 @@ module.exports = {
 
 ## License
 
-See [LICENSE.md](./LICENSE.md).
+Copyright 2018 Andrew Duthie
+
+Released under the [MIT License](./LICENSE.md).
