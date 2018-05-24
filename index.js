@@ -67,29 +67,27 @@ module.exports = class ResolveEntryModulesPlugin {
 		const { entry, context } = compiler.options;
 		const entryRoots = ResolveEntryModulesPlugin.getEntryRoots( entry, context );
 
-		compiler.plugin( 'after-resolvers', () => {
-			compiler.resolvers.normal.apply( {
-				apply( resolver ) {
-					resolver.plugin( 'module', ( request, callback ) => {
-						// Find entry root which contains the requesting path
-						const resolvePath = find(
-							entryRoots,
-							containsPath.bind( null, request.path )
-						);
+		compiler.hooks.afterResolvers.tap( 'ResolveEntryModulesPlugin', () => {
+			compiler.resolverFactory.hooks.resolver.for( 'normal' ).tap( 'ResolveEntryModulesPlugin', ( resolver ) => {
+				resolver.hooks.module.tapAsync( 'ResolveEntryModulesPlugin', ( request, resolverContext, callback ) => {
+					// Find entry root which contains the requesting path
+					const resolvePath = find(
+						entryRoots,
+						containsPath.bind( null, request.path )
+					);
 
-						if ( ! resolvePath ) {
-							return callback();
-						}
+					if ( ! resolvePath ) {
+						return callback();
+					}
 
-						// Add entry root as resolve base path
-						const obj = assign( {}, request, {
-							path: resolvePath,
-							request: './' + request.request,
-						} );
-
-						resolver.doResolve( 'resolve', obj, '', callback );
+					// Add entry root as resolve base path
+					const obj = assign( {}, request, {
+						path: resolvePath,
+						request: './' + request.request,
 					} );
-				},
+
+					resolver.doResolve( resolver.hooks.resolve, obj, '', resolverContext, callback );
+				} );
 			} );
 		} );
 	}
