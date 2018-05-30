@@ -1,6 +1,6 @@
 {
   "name": "resolve-entry-modules-webpack-plugin",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Webpack plugin for considering each entry's enclosing directory as a resolve root",
   "main": "index.js",
   "scripts": {
