@@ -1,6 +1,6 @@
 # Resolve Entry Modules Webpack Plugin
 
-Webpack plugin for considering each entry's enclosing directory as a resolve root for all imports within occurring in the dependency tree of that entry. It is effectively the same as defeining a `resolve.modules` for each directory of your `entry` while ensuring that distinct entries cannot import from the others.
+Webpack plugin for considering each entry's enclosing directory as a resolve root for all imports within occurring in the dependency tree of that entry. It is effectively the same as defining a `resolve.modules` for each directory of your `entry` while ensuring that distinct entries cannot import from the others.
 
 ## Usage
 
