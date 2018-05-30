@@ -2,7 +2,7 @@ const EntryResolvePlugin = require( '../../' );
 
 class SilentOutputPlugin {
 	apply( compiler ) {
-		compiler.plugin( 'should-emit', () => false );
+		compiler.hooks.shouldEmit.tap( 'SilentOutputPlugin', () => false );
 	}
 }
 
